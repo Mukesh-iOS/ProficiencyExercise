@@ -12,6 +12,7 @@
 		3446966320D656B200D5C290 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3446966220D656B200D5C290 /* Assets.xcassets */; };
 		3446966620D656B200D5C290 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3446966420D656B200D5C290 /* LaunchScreen.storyboard */; };
 		3446966F20D658AB00D5C290 /* CGWelcomeSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */; };
+		3446967320D65BD100D5C290 /* CGListSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967220D65BD100D5C290 /* CGListSceneVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3446966520D656B200D5C290 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3446966720D656B200D5C290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGWelcomeSceneVC.swift; sourceTree = "<group>"; };
+		3446967220D65BD100D5C290 /* CGListSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGListSceneVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				3446965B20D656AC00D5C290 /* AppDelegate.swift */,
 				3446966D20D6589000D5C290 /* Welcome Scene */,
+				3446967020D65B9800D5C290 /* List Scene */,
 				3446965F20D656AC00D5C290 /* Main.storyboard */,
 				3446966220D656B200D5C290 /* Assets.xcassets */,
 				3446966420D656B200D5C290 /* LaunchScreen.storyboard */,
@@ -70,6 +73,22 @@
 				3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */,
 			);
 			path = "Welcome Scene";
+			sourceTree = "<group>";
+		};
+		3446967020D65B9800D5C290 /* List Scene */ = {
+			isa = PBXGroup;
+			children = (
+				3446967120D65BBD00D5C290 /* View */,
+			);
+			path = "List Scene";
+			sourceTree = "<group>";
+		};
+		3446967120D65BBD00D5C290 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3446967220D65BD100D5C290 /* CGListSceneVC.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +165,7 @@
 			files = (
 				3446966F20D658AB00D5C290 /* CGWelcomeSceneVC.swift in Sources */,
 				3446965C20D656AC00D5C290 /* AppDelegate.swift in Sources */,
+				3446967320D65BD100D5C290 /* CGListSceneVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
