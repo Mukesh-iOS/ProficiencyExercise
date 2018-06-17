@@ -13,6 +13,9 @@ class CGListSceneVC: UIViewController{
     @IBOutlet weak var listTable: UITableView!
     
     var lists : [rowDetails]?
+    var imageWithWidthPaddings : CGFloat?
+    var imageWithHeightPaddings : CGFloat?
+    
     let listViewModel = CGListSceneViewModel()
     
     override func viewDidLoad() {
@@ -61,6 +64,15 @@ class CGListSceneVC: UIViewController{
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+    func calculateConstants()
+    {
+        // Calculation changes depends on device and orientation
+        
+        let imageWidthAndHeight : CGFloat = listTable.frame.size.width - ((listTable.frame.size.width / 3) * 2)
+        imageWithWidthPaddings = imageWidthAndHeight + CGFloat(constraintsConstants.widthPaddings)
+        imageWithHeightPaddings = imageWidthAndHeight + CGFloat(constraintsConstants.heightPaddings)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,7 +92,22 @@ extension CGListSceneVC: UITableViewDataSource, UITableViewDelegate {
     
     func  tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-       return 200
+        calculateConstants()
+        
+        let contentLabelWidth = tableView.frame.size.width - imageWithWidthPaddings!
+        
+        let cellDetail : rowDetails = self.lists![indexPath.row]
+        
+        if let contentDescription = cellDetail.description{
+            let ContentHeight = contentDescription.height(withConstrainedWidth: contentLabelWidth, font: UIFont.preferredFont(forTextStyle: .body))
+            
+            // Calculating total height of the cell dynamically adding with paddings
+            
+            let cellHeight = (ContentHeight + CGFloat(constraintsConstants.heightPaddings)) < imageWithHeightPaddings! ? imageWithHeightPaddings! : ContentHeight + CGFloat(constraintsConstants.heightPaddings)
+            
+            return cellHeight
+        }
+        return imageWithHeightPaddings!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

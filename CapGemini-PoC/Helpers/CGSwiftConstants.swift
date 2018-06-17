@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct constraintsConstants {
+    
+    static let heightPaddings = 60.0
+    static let widthPaddings = 40.0
+}
+
 struct StatusCode {
     
     static let Success = 200
