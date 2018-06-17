@@ -10,13 +10,21 @@ import UIKit
 
 class CGListSceneViewModel: NSObject {
     
+    var screenTitle : String?
+    var lists : [rowDetails]?
+    
     func listAPICall(_ completion: @escaping (String?) -> ())
     {
-        CGWebServiceRequest.serviceRequest(urlRequest: CGListSceneModel.listRequest(), resultStruct: CGListSceneModel.self) { (listResponse, errorInfo) in
+        CGWebServiceRequest.serviceRequest(urlRequest: CGListSceneModel.listRequest(), resultStruct: CGListSceneModel.self) { [weak self] (listResponse, errorInfo) in
             
-            if errorInfo == nil {
+            if errorInfo == nil, let strongSelf = self {
                 
-                debugPrint(listResponse as! NSDictionary)
+                strongSelf.screenTitle = (listResponse as? CGListSceneModel)?.title
+                
+                // Eliminate data if image, title and description are null and grouping into array
+                strongSelf.lists = (listResponse as? CGListSceneModel)?.rows?.filter ({
+                    $0.title != nil || $0.description != nil || $0.imageHref != nil
+                })
             }
             completion(errorInfo)
         }

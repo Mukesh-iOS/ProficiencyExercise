@@ -49,7 +49,9 @@ struct CGWebServiceRequest {
                 switch (httpResponse.statusCode)
                 {
                 case StatusCode.Success:
-
+                    
+                    let decoder = JSONDecoder()
+                    
                     // Getting response in ISOLatin type
                     let responseStrInISOLatin = String(data: data!, encoding: String.Encoding.isoLatin1)
                     
@@ -63,8 +65,12 @@ struct CGWebServiceRequest {
                         let responseJSONDict = try JSONSerialization.jsonObject(with: modifiedDataInUTF8Format)
                         debugPrint(responseJSONDict as! NSDictionary)
                         
+                        // Parsing to custom model
+                        let jsonData = try JSONSerialization.data(withJSONObject: responseJSONDict, options: .prettyPrinted)
+                        
+                        let resultantModel = try decoder.decode(resultStruct, from: jsonData)
                         DispatchQueue.main.async {
-                            completionHandler(responseJSONDict, nil)
+                            completionHandler(resultantModel, nil)
                         }
                     } catch let error {
                         DispatchQueue.main.async {
