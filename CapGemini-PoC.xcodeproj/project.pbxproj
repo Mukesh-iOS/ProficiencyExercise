@@ -13,6 +13,7 @@
 		3446966620D656B200D5C290 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3446966420D656B200D5C290 /* LaunchScreen.storyboard */; };
 		3446966F20D658AB00D5C290 /* CGWelcomeSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */; };
 		3446967320D65BD100D5C290 /* CGListSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967220D65BD100D5C290 /* CGListSceneVC.swift */; };
+		3446967520D6674400D5C290 /* CGListSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967420D6674400D5C290 /* CGListSceneCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		3446966720D656B200D5C290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGWelcomeSceneVC.swift; sourceTree = "<group>"; };
 		3446967220D65BD100D5C290 /* CGListSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGListSceneVC.swift; sourceTree = "<group>"; };
+		3446967420D6674400D5C290 /* CGListSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CGListSceneCell.swift; path = ../../../../../../Documents/CGListSceneCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				3446967220D65BD100D5C290 /* CGListSceneVC.swift */,
+				3446967420D6674400D5C290 /* CGListSceneCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3446967520D6674400D5C290 /* CGListSceneCell.swift in Sources */,
 				3446966F20D658AB00D5C290 /* CGWelcomeSceneVC.swift in Sources */,
 				3446965C20D656AC00D5C290 /* AppDelegate.swift in Sources */,
 				3446967320D65BD100D5C290 /* CGListSceneVC.swift in Sources */,
