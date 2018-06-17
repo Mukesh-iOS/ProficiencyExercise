@@ -12,6 +12,7 @@ class CGListSceneVC: UIViewController{
     
     @IBOutlet weak var listTable: UITableView!
     
+    var lists : [rowDetails]?
     let listViewModel = CGListSceneViewModel()
     
     override func viewDidLoad() {
@@ -34,9 +35,24 @@ class CGListSceneVC: UIViewController{
     
     func getListsFromRest()
     {
-        listViewModel.listAPICall { (errorInfo) in
+        listViewModel.listAPICall { [weak self] (errorInfo) in
         
-            debugPrint(errorInfo ?? "No error")
+            if let strongSelf = self
+            {
+                DispatchQueue.main.async {
+                    
+                    /* Updating UI on success */
+                    
+                    // Set navigation title
+                    strongSelf.navigationItem.title = strongSelf.listViewModel.screenTitle
+                    
+                    // Reload tableview
+                    strongSelf.lists = strongSelf.listViewModel.lists
+                    strongSelf.listTable.reloadData()
+                    
+                    debugPrint(errorInfo ?? "No error")
+                }
+            }
         }
     }
     
@@ -56,7 +72,9 @@ extension CGListSceneVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CGListSceneCell") as! CGListSceneCell
-                
+        
+        cell.loadData(model: self.lists!, onIndex: indexPath)
+        
         return cell
     }
     
@@ -67,6 +85,6 @@ extension CGListSceneVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return self.lists?.count ?? 0
     }
 }
