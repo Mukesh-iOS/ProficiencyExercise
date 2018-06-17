@@ -2,7 +2,7 @@
 //  CGListSceneVC.swift
 //  CapGemini-PoC
 //
-//  Created by Ratheesh on 17/06/18.
+//  Created by murugananda on 17/06/18.
 //  Copyright © 2018 murugananda. All rights reserved.
 //
 
@@ -11,6 +11,8 @@ import UIKit
 class CGListSceneVC: UIViewController{
     
     @IBOutlet weak var listTable: UITableView!
+    
+    let listViewModel = CGListSceneViewModel()
     
     override func viewDidLoad() {
         
@@ -22,9 +24,20 @@ class CGListSceneVC: UIViewController{
     
     func initialSetup()
     {
+        // Getting list details
+        getListsFromRest()
+        
         // Navigation bar setup
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.backgroundColor = UIColor.black
+    }
+    
+    func getListsFromRest()
+    {
+        listViewModel.listAPICall { (errorInfo) in
+        
+            debugPrint(errorInfo ?? "No error")
+        }
     }
     
     @IBAction func popScreen(_ sender: Any) {
