@@ -11,6 +11,15 @@
 		3446966120D656AC00D5C290 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3446965F20D656AC00D5C290 /* Main.storyboard */; };
 		3446966320D656B200D5C290 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3446966220D656B200D5C290 /* Assets.xcassets */; };
 		3446966620D656B200D5C290 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3446966420D656B200D5C290 /* LaunchScreen.storyboard */; };
+		3446966F20D658AB00D5C290 /* CGWelcomeSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */; };
+		3446967320D65BD100D5C290 /* CGListSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967220D65BD100D5C290 /* CGListSceneVC.swift */; };
+		3446967820D6694600D5C290 /* CGSwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967720D6694600D5C290 /* CGSwiftExtensions.swift */; };
+		3446967A20D6698F00D5C290 /* CGReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967920D6698F00D5C290 /* CGReachability.swift */; };
+		3446967E20D66BAE00D5C290 /* CGWebEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967D20D66BAE00D5C290 /* CGWebEngine.swift */; };
+		3446968020D66BFC00D5C290 /* CGSwiftConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446967F20D66BFC00D5C290 /* CGSwiftConstants.swift */; };
+		3446968220D66CB800D5C290 /* CGListSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446968120D66CB800D5C290 /* CGListSceneViewModel.swift */; };
+		3446968420D66D9E00D5C290 /* CGListSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446968320D66D9E00D5C290 /* CGListSceneCell.swift */; };
+		3446968620D66E1E00D5C290 /* CGListSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446968520D66E1E00D5C290 /* CGListSceneModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +29,15 @@
 		3446966220D656B200D5C290 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3446966520D656B200D5C290 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3446966720D656B200D5C290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGWelcomeSceneVC.swift; sourceTree = "<group>"; };
+		3446967220D65BD100D5C290 /* CGListSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGListSceneVC.swift; sourceTree = "<group>"; };
+		3446967720D6694600D5C290 /* CGSwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSwiftExtensions.swift; sourceTree = "<group>"; };
+		3446967920D6698F00D5C290 /* CGReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGReachability.swift; sourceTree = "<group>"; };
+		3446967D20D66BAE00D5C290 /* CGWebEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGWebEngine.swift; sourceTree = "<group>"; };
+		3446967F20D66BFC00D5C290 /* CGSwiftConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSwiftConstants.swift; sourceTree = "<group>"; };
+		3446968120D66CB800D5C290 /* CGListSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGListSceneViewModel.swift; sourceTree = "<group>"; };
+		3446968320D66D9E00D5C290 /* CGListSceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGListSceneCell.swift; sourceTree = "<group>"; };
+		3446968520D66E1E00D5C290 /* CGListSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CGListSceneModel.swift; path = "CapGemini-PoC/List Scene/CGListSceneModel.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +71,53 @@
 			isa = PBXGroup;
 			children = (
 				3446965B20D656AC00D5C290 /* AppDelegate.swift */,
+				3446966D20D6589000D5C290 /* Welcome Scene */,
+				3446967020D65B9800D5C290 /* List Scene */,
+				3446967620D6693000D5C290 /* Helpers */,
 				3446965F20D656AC00D5C290 /* Main.storyboard */,
 				3446966220D656B200D5C290 /* Assets.xcassets */,
 				3446966420D656B200D5C290 /* LaunchScreen.storyboard */,
 				3446966720D656B200D5C290 /* Info.plist */,
 			);
 			path = "CapGemini-PoC";
+			sourceTree = "<group>";
+		};
+		3446966D20D6589000D5C290 /* Welcome Scene */ = {
+			isa = PBXGroup;
+			children = (
+				3446966E20D658AB00D5C290 /* CGWelcomeSceneVC.swift */,
+			);
+			path = "Welcome Scene";
+			sourceTree = "<group>";
+		};
+		3446967020D65B9800D5C290 /* List Scene */ = {
+			isa = PBXGroup;
+			children = (
+				3446968520D66E1E00D5C290 /* CGListSceneModel.swift */,
+				3446967120D65BBD00D5C290 /* View */,
+				3446968120D66CB800D5C290 /* CGListSceneViewModel.swift */,
+			);
+			path = "List Scene";
+			sourceTree = "<group>";
+		};
+		3446967120D65BBD00D5C290 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3446967220D65BD100D5C290 /* CGListSceneVC.swift */,
+				3446968320D66D9E00D5C290 /* CGListSceneCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3446967620D6693000D5C290 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3446967720D6694600D5C290 /* CGSwiftExtensions.swift */,
+				3446967920D6698F00D5C290 /* CGReachability.swift */,
+				3446967D20D66BAE00D5C290 /* CGWebEngine.swift */,
+				3446967F20D66BFC00D5C290 /* CGSwiftConstants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,7 +192,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3446967820D6694600D5C290 /* CGSwiftExtensions.swift in Sources */,
+				3446967E20D66BAE00D5C290 /* CGWebEngine.swift in Sources */,
+				3446967A20D6698F00D5C290 /* CGReachability.swift in Sources */,
+				3446966F20D658AB00D5C290 /* CGWelcomeSceneVC.swift in Sources */,
+				3446968020D66BFC00D5C290 /* CGSwiftConstants.swift in Sources */,
 				3446965C20D656AC00D5C290 /* AppDelegate.swift in Sources */,
+				3446968620D66E1E00D5C290 /* CGListSceneModel.swift in Sources */,
+				3446967320D65BD100D5C290 /* CGListSceneVC.swift in Sources */,
+				3446968220D66CB800D5C290 /* CGListSceneViewModel.swift in Sources */,
+				3446968420D66D9E00D5C290 /* CGListSceneCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
