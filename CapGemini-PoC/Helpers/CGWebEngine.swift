@@ -91,4 +91,29 @@ struct CGWebServiceRequest {
             completionHandler(nil, "Bad spot!! No network available")
         }
     }
+    
+    static func imageRequest(with link: String, completion: @escaping ((UIImage?) -> Void ))
+    {
+        URLSession.shared.dataTask( with: URL(string: link)!, completionHandler: {
+            (data, response, error) -> Void in
+            
+            // Check if data is available
+            guard let data = data, let httpResponse = response as? HTTPURLResponse else{
+                return
+            }
+            
+            if (httpResponse.statusCode == StatusCode.Success)
+            {
+                DispatchQueue.main.async {
+                    
+                    // Check if image is available
+                    if let image = UIImage(data: data)
+                    {
+                        imageCache.setObject(image, forKey: link as NSString)
+                        completion(image)
+                    }
+                }
+            }
+        }).resume()
+    }
 }

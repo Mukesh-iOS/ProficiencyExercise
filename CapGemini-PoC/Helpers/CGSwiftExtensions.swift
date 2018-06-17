@@ -8,6 +8,9 @@
 
 import UIKit
 
+let imageCache = NSCache<NSString, AnyObject>()
+var cachedIndexPaths = [IndexPath]()
+
 extension URLRequest {
     
     static func getRequestWithConfiguration(_ urlString: String?) -> URLRequest? {
@@ -36,5 +39,27 @@ extension String
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
         
         return ceil(boundingBox.height)
+    }
+}
+
+extension UIImageView {
+    
+    class func downloadImageFrom (link:String, withIndexPath: IndexPath, completion: @escaping (UIImage) -> Void)
+    {
+        if link.count > 0 {
+            // check cached image
+            if let cachedImage = imageCache.object(forKey: link as NSString) as? UIImage {
+                completion(cachedImage)
+                
+            } else if (!cachedIndexPaths.contains(withIndexPath))
+            {
+                cachedIndexPaths.append(withIndexPath)
+                
+                CGWebServiceRequest.imageRequest(with: link) { (completedImage) in
+                    
+                    completion(completedImage!)
+                }
+            }
+        }
     }
 }

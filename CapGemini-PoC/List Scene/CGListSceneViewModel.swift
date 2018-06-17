@@ -25,6 +25,11 @@ class CGListSceneViewModel: NSObject {
                 strongSelf.lists = (listResponse as? CGListSceneModel)?.rows?.filter ({
                     $0.title != nil || $0.description != nil || $0.imageHref != nil
                 })
+                
+                // Clearing cache which will help in replacing images if it is changed on remote
+                
+                cachedIndexPaths.removeAll()
+                imageCache.removeAllObjects()
             }
             completion(errorInfo)
         }

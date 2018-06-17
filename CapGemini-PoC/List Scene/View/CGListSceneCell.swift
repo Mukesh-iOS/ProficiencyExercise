@@ -22,6 +22,21 @@ class CGListSceneCell : UITableViewCell {
         let descriptionText = (model[onIndex.row] as rowDetails).description
         contentDescription.text = descriptionText ?? "No description available"
         contentDescription.textColor = descriptionText != nil ? UIColor.darkGray : UIColor.lightGray
+        
+        let urlString = (model[onIndex.row] as rowDetails).imageHref ?? ""
+        
+        // Download images on background
+        DispatchQueue.global(qos: .background).async {
+            
+            UIImageView.downloadImageFrom(link: urlString, withIndexPath: onIndex) { (downloadedImage) in
+                
+                DispatchQueue.main.async {
+                    
+                    // Updating UI on main thread
+                    self.contentPic.image = downloadedImage
+                }
+            }
+        }
     }
 }
 
