@@ -58,18 +58,19 @@ class CGListSceneVC: UIViewController{
                         strongSelf.refreshControl.endRefreshing()
                     }
                     
+                    if let errorDescription = errorInfo {
+                        
+                        // Show alert on error cases
+                        UIAlertController().showSimpleAlert(message: errorDescription, inViewController: strongSelf)
+                        return
+                    }
+                    
                     // Set navigation title
                     strongSelf.navigationItem.title = strongSelf.listViewModel.screenTitle
                     
                     // Reload tableview
                     strongSelf.lists = strongSelf.listViewModel.lists
                     strongSelf.listTable.reloadData()
-                    
-                    if let errorDescription = errorInfo {
-                        
-                        // Show alert on error cases
-                        UIAlertController().showSimpleAlert(message: errorDescription, inViewController: strongSelf)
-                    }
                 }
             }
         }
