@@ -16,6 +16,7 @@ class CGListSceneVC: UIViewController{
     var imageWithWidthPaddings : CGFloat?
     var imageWithHeightPaddings : CGFloat?
     
+    var refreshControl = UIRefreshControl()
     let listViewModel = CGListSceneViewModel()
     
     override func viewDidLoad() {
@@ -31,6 +32,11 @@ class CGListSceneVC: UIViewController{
         // Getting list details
         getListsFromRest()
         
+        // Adding pull to refresh logic
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refreshScreen), for: .valueChanged)
+        listTable.addSubview(refreshControl)
+        
         // Navigation bar setup
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.backgroundColor = UIColor.black
@@ -45,6 +51,12 @@ class CGListSceneVC: UIViewController{
                 DispatchQueue.main.async {
                     
                     /* Updating UI on success */
+                    
+                    // Remove refresh control
+                    if(strongSelf.refreshControl.isRefreshing) {
+                        
+                        strongSelf.refreshControl.endRefreshing()
+                    }
                     
                     // Set navigation title
                     strongSelf.navigationItem.title = strongSelf.listViewModel.screenTitle
@@ -66,6 +78,13 @@ class CGListSceneVC: UIViewController{
     @IBAction func popScreen(_ sender: Any) {
         
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    // MARK: Helper Methods
+    
+    @objc func refreshScreen() {
+        
+        getListsFromRest()
     }
     
     func calculateConstants()
