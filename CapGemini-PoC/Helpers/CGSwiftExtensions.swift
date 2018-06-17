@@ -63,3 +63,14 @@ extension UIImageView {
         }
     }
 }
+
+extension UIAlertController{
+    
+    func showSimpleAlert( message : String , inViewController : UIViewController){
+        let alert = UIAlertController(title: "CapGemini", message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        
+        inViewController.present(alert, animated: true , completion: nil)
+    }
+}

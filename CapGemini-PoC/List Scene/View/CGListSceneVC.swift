@@ -53,7 +53,11 @@ class CGListSceneVC: UIViewController{
                     strongSelf.lists = strongSelf.listViewModel.lists
                     strongSelf.listTable.reloadData()
                     
-                    debugPrint(errorInfo ?? "No error")
+                    if let errorDescription = errorInfo {
+                        
+                        // Show alert on error cases
+                        UIAlertController().showSimpleAlert(message: errorDescription, inViewController: strongSelf)
+                    }
                 }
             }
         }
