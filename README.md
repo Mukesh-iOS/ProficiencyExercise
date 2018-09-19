@@ -8,7 +8,7 @@ Release Notes:
 •	Design Pattern used – MVVM
 •	Deployment target -  iOS 8.0
 •	Developed tool – Xcode 9.4
-•	Languages used – Swift 4.1.2
+•	Languages used – Swift 4.2
 •	Third party frameworks used – Nil
 •	Device compatibility – Universal (Designs will be big or small automatically based on the device and orientation)
 •	App Transport Security – Used
