@@ -10,11 +10,10 @@ import UIKit
 
 class CGListSceneViewModel: NSObject {
     
-    var screenTitle : String?
-    var lists : [rowDetails]?
+    var screenTitle: String?
+    var lists: [rowDetails]?
     
-    func listAPICall(_ completion: @escaping (String?) -> ())
-    {
+    func listAPICall(_ completion: @escaping (String?) -> ()) {
         CGWebServiceRequest.serviceRequest(urlRequest: CGListSceneModel.listRequest(), resultStruct: CGListSceneModel.self) { [weak self] (listResponse, errorInfo) in
             
             if errorInfo == nil, let strongSelf = self {

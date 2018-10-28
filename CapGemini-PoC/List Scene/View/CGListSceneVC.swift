@@ -12,12 +12,12 @@ class CGListSceneVC: UIViewController{
     
     @IBOutlet weak var listTable: UITableView!
     
-    var lists : [rowDetails]?
-    var imageWithWidthPaddings : CGFloat?
-    var imageWithHeightPaddings : CGFloat?
+    var lists: [rowDetails]?
+    var imageWithWidthPaddings: CGFloat?
+    var imageWithHeightPaddings: CGFloat?
     
     var refreshControl = UIRefreshControl()
-    let listViewModel = CGListSceneViewModel()
+    var listViewModel: CGListSceneViewModel?
     
     override func viewDidLoad() {
         
@@ -27,8 +27,8 @@ class CGListSceneVC: UIViewController{
     
     // MARK: Initial Setup
     
-    func initialSetup()
-    {
+    private func initialSetup() {
+        listViewModel = CGListSceneViewModel()
         // Getting list details
         getListsFromRest()
         
@@ -42,12 +42,10 @@ class CGListSceneVC: UIViewController{
         self.navigationController?.navigationBar.backgroundColor = UIColor.black
     }
     
-    func getListsFromRest()
-    {
-        listViewModel.listAPICall { [weak self] (errorInfo) in
+    private func getListsFromRest() {
+        listViewModel?.listAPICall { [weak self] (errorInfo) in
         
-            if let strongSelf = self
-            {
+            if let strongSelf = self {
                 DispatchQueue.main.async {
                     
                     /* Updating UI on success */
@@ -66,10 +64,10 @@ class CGListSceneVC: UIViewController{
                     }
                     
                     // Set navigation title
-                    strongSelf.navigationItem.title = strongSelf.listViewModel.screenTitle
+                    strongSelf.navigationItem.title = strongSelf.listViewModel?.screenTitle
                     
                     // Reload tableview
-                    strongSelf.lists = strongSelf.listViewModel.lists
+                    strongSelf.lists = strongSelf.listViewModel?.lists
                     strongSelf.listTable.reloadData()
                 }
             }
@@ -83,13 +81,12 @@ class CGListSceneVC: UIViewController{
     
     // MARK: Helper Methods
     
-    @objc func refreshScreen() {
+    @objc private func refreshScreen() {
         
         getListsFromRest()
     }
     
-    func calculateConstants()
-    {
+    private func calculateConstants() {
         // Calculation changes depends on device and orientation
         
         let imageWidthAndHeight : CGFloat = listTable.frame.size.width - ((listTable.frame.size.width / 3) * 2)
@@ -107,22 +104,26 @@ extension CGListSceneVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CGListSceneCell") as! CGListSceneCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CGListSceneCell") as? CGListSceneCell
         
-        cell.loadData(model: self.lists!, onIndex: indexPath)
+        guard let listSceneCell = cell, self.lists?.count ?? 0 > 0 else {
+            
+            return UITableViewCell()
+        }
         
-        return cell
+        listSceneCell.loadData(model: self.lists, onIndex: indexPath)
+        
+        return listSceneCell
     }
     
-    func  tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         calculateConstants()
         
         let contentLabelWidth = tableView.frame.size.width - imageWithWidthPaddings!
         
-        let cellDetail : rowDetails = self.lists![indexPath.row]
-        
-        if let contentDescription = cellDetail.description{
+        if let cellDetail: rowDetails = self.lists?[indexPath.row], let contentDescription = cellDetail.description {
+            
             let ContentHeight = contentDescription.height(withConstrainedWidth: contentLabelWidth, font: UIFont.preferredFont(forTextStyle: .body))
             
             // Calculating total height of the cell dynamically adding with paddings

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CGListSceneModel : Codable {
+struct CGListSceneModel: Codable {
     
     // List Scene API Request Info
     
