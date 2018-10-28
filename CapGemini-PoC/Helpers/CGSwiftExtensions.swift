@@ -32,8 +32,7 @@ extension URLRequest {
     }
 }
 
-extension String
-{
+extension String {
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
@@ -44,15 +43,13 @@ extension String
 
 extension UIImageView {
     
-    class func downloadImageFrom (link:String, withIndexPath: IndexPath, completion: @escaping (UIImage) -> Void)
-    {
+    class func downloadImageFrom (link:String, withIndexPath: IndexPath, completion: @escaping (UIImage) -> Void) {
         if link.count > 0 {
             // check cached image
             if let cachedImage = imageCache.object(forKey: link as NSString) as? UIImage {
                 completion(cachedImage)
                 
-            } else if (!cachedIndexPaths.contains(withIndexPath))
-            {
+            } else if (!cachedIndexPaths.contains(withIndexPath)) {
                 cachedIndexPaths.append(withIndexPath)
                 
                 CGWebServiceRequest.imageRequest(with: link) { (completedImage) in
@@ -66,7 +63,7 @@ extension UIImageView {
 
 extension UIAlertController{
     
-    func showSimpleAlert( message : String , inViewController : UIViewController){
+    func showSimpleAlert( message: String , inViewController: UIViewController) {
         let alert = UIAlertController(title: "CapGemini", message: message, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))

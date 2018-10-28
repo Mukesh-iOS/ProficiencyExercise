@@ -46,45 +46,45 @@ struct CGWebServiceRequest {
                     return
                 }
                 
-                switch (httpResponse.statusCode)
-                {
-                case StatusCode.Success:
+                switch (httpResponse.statusCode) {
                     
-                    let decoder = JSONDecoder()
-                    
-                    // Getting response in ISOLatin type
-                    let responseStrInISOLatin = String(data: data!, encoding: String.Encoding.isoLatin1)
-                    
-                    // Converting to UTF8 data
-                    guard let modifiedDataInUTF8Format = responseStrInISOLatin?.data(using: String.Encoding.utf8) else {
-                        completionHandler(nil, "could not convert data to UTF-8 format")
-                        return
-                    }
-                    do {
-                        // Converting to json dictionary
-                        let responseJSONDict = try JSONSerialization.jsonObject(with: modifiedDataInUTF8Format)
-                        debugPrint(responseJSONDict as! NSDictionary)
+                    case StatusCode.Success:
                         
-                        // Parsing to custom model
-                        let jsonData = try JSONSerialization.data(withJSONObject: responseJSONDict, options: .prettyPrinted)
+                        let decoder = JSONDecoder()
                         
-                        let resultantModel = try decoder.decode(resultStruct, from: jsonData)
-                        DispatchQueue.main.async {
-                            completionHandler(resultantModel, nil)
+                        // Getting response in ISOLatin type
+                        let responseStrInISOLatin = String(data: data!, encoding: String.Encoding.isoLatin1)
+                        
+                        // Converting to UTF8 data
+                        guard let modifiedDataInUTF8Format = responseStrInISOLatin?.data(using: String.Encoding.utf8) else {
+                            completionHandler(nil, "could not convert data to UTF-8 format")
+                            return
                         }
-                    } catch let error {
-                        DispatchQueue.main.async {
-                            completionHandler(nil, error.localizedDescription)
+                        do {
+                            // Converting to json dictionary
+                            let responseJSONDict = try JSONSerialization.jsonObject(with: modifiedDataInUTF8Format)
+                            debugPrint(responseJSONDict as! NSDictionary)
+                            
+                            // Parsing to custom model
+                            let jsonData = try JSONSerialization.data(withJSONObject: responseJSONDict, options: .prettyPrinted)
+                            
+                            let resultantModel = try decoder.decode(resultStruct, from: jsonData)
+                            DispatchQueue.main.async {
+                                completionHandler(resultantModel, nil)
+                            }
+                        } catch let error {
+                            DispatchQueue.main.async {
+                                completionHandler(nil, error.localizedDescription)
+                            }
                         }
+                        break
+                    default:
+                        // Failure case
+                        DispatchQueue.main.async {
+                            completionHandler(nil, "Unsuccessfull process")
+                        }
+                        break
                     }
-                    break
-                default:
-                    // Failure case
-                    DispatchQueue.main.async {
-                        completionHandler(nil, "Unsuccessfull process")
-                    }
-                    break
-                }
             })
         } else {
             
@@ -92,23 +92,20 @@ struct CGWebServiceRequest {
         }
     }
     
-    static func imageRequest(with link: String, completion: @escaping ((UIImage?) -> Void ))
-    {
+    static func imageRequest(with link: String, completion: @escaping ((UIImage?) -> Void )) {
         URLSession.shared.dataTask( with: URL(string: link)!, completionHandler: {
             (data, response, error) -> Void in
             
             // Check if data is available
-            guard let data = data, let httpResponse = response as? HTTPURLResponse else{
+            guard let data = data, let httpResponse = response as? HTTPURLResponse else {
                 return
             }
             
-            if (httpResponse.statusCode == StatusCode.Success)
-            {
+            if (httpResponse.statusCode == StatusCode.Success) {
                 DispatchQueue.main.async {
                     
                     // Check if image is available
-                    if let image = UIImage(data: data)
-                    {
+                    if let image = UIImage(data: data) {
                         imageCache.setObject(image, forKey: link as NSString)
                         completion(image)
                     }
